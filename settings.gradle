@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "SettingsModule"
-include ':app'
+include ':dataSettingsModule'
