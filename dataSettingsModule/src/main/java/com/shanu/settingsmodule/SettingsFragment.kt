@@ -1,6 +1,5 @@
 package com.shanu.settingsmodule
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +19,12 @@ class SettingsFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var settingsModuleDataCallback: () -> Unit
+
+    fun registerSettingsModuleDataCallback(dataCallback: () -> Unit) {
+        settingsModuleDataCallback = dataCallback
+    }
+
     override fun onDestroy() {
         super.onDestroy()
     }
@@ -36,7 +41,7 @@ class SettingsFragment : Fragment() {
             override fun handleOnBackPressed() {
                 /*val intent = Intent(activity, LoginActivity::class.java)
                 startActivity(intent)
-                activity?.finish()*/
+                activity?.finish()
                 Intent(
                     requireActivity(),
                     Class.forName("com.shanu.nmsuperapp.presentation.activity.LoginActivity")
@@ -44,7 +49,8 @@ class SettingsFragment : Fragment() {
                     startActivity(this)
                 }.also {
                     activity?.finish()
-                }
+                }*/
+                settingsModuleDataCallback.invoke()
             }
         })
 
